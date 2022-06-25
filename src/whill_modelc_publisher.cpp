@@ -237,6 +237,7 @@ int main(int argc, char **argv)
 	// loop
 	int msg_cnt = 0;
 	RCLCPP_INFO(node->get_logger(), "Start WHILL message reporting");
+	odom.reset();
 	while(rclcpp::ok())
  	{
 		//RCLCPP_INFO(node->get_logger(), "WHILL message %d is published", msg_cnt ++);
@@ -246,6 +247,7 @@ int main(int argc, char **argv)
 		sensor_msgs::msg::Imu imu;
 		sensor_msgs::msg::BatteryState batteryState;
 		nav_msgs::msg::Odometry odom_msg;
+		
 
 		// WHILL data
 		// Process epoll
@@ -353,31 +355,31 @@ int main(int argc, char **argv)
 					joy.axes[0] = -msg.joy_side / 100.0f; //X
 					joy.axes[1] = msg.joy_front  / 100.0f; //Y
 
-
+/*
 					// JointState message
 					jointState.name.resize(2);
 					jointState.position.resize(2);
 					jointState.velocity.resize(2);
 
-					jointState.name[0]     = "leftWheel";
-					jointState.position[0] = msg.left_motor_angle;  //Rad
+					jointState.name[0]     = "leftWheel_link";
+					//jointState.position[0] = msg.left_motor_angle; 
+					jointState.position[0] = 0;  //Rad
 
 					static double past[2] = {0.0f,0.0f};
 					
 					if(time_diff_ms != 0)jointState.velocity[0] = calc_rad_diff(past[0],jointState.position[0]) / (double(time_diff_ms) / 1000.0f);
 					else jointState.velocity[0] = 0;
 
-					past[0] = jointState.position[0];
+					//past[0] = jointState.position[0];
 
-					jointState.name[1]     = "rightWheel";
-					jointState.position[1] = msg.right_motor_angle;  //Rad
+					jointState.name[1]     = "rightWheel_link";
+					jointState.position[1] = 0;
+					//jointState.position[1] = msg.right_motor_angle;  //Rad
 
 					if(time_diff_ms != 0)jointState.velocity[1] = calc_rad_diff(past[1],jointState.position[1]) / (double(time_diff_ms) / 1000.0f);
 					else jointState.velocity[0] = 0;
 					past[1] = jointState.position[1];
-
-
-					odom.update(jointState, time_diff_ms/1000.0f);
+					odom.update(jointState, time_diff_ms/1000.0f); //change true or false to change odom update
 					
 
 					msg.error = int(recv_buf[28] & 0xff);
@@ -391,7 +393,7 @@ int main(int argc, char **argv)
 					whill_modelc_joint_state->publish(jointState);
 					whill_modelc_imu->publish(imu);
 					whill_modelc_battery->publish(batteryState);
-
+/*
 					// Publish Odometry
 					geometry_msgs::msg::TransformStamped odom_trans;
 					odom_trans = odom.getROSTransformStamped();
@@ -407,6 +409,7 @@ int main(int argc, char **argv)
 					odom_msg.header.frame_id = "odom";
 					odom_msg.child_frame_id = "base_link";
 					whill_modelc_odom->publish(odom_msg);
+*/
 				}
 			}
 		}

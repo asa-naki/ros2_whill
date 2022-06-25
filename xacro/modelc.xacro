@@ -201,6 +201,15 @@
         <child link="imu"/>
     </joint>
 
+    <link name="velodyne">
+    </link>
+
+    <joint name="velodyne" type="fixed">
+        <origin xyz="0 0 1.0" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="velodyne"/>
+    </joint>
+
 
     <!-- ===============  Transmission =============== -->
 
