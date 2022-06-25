@@ -3,6 +3,8 @@
 
 ROS2 package for WHILL Model CR
 
+
+this branch is experiment(ignore odom frame)
 ## ROS API
 
 ### Subscribed Topics
