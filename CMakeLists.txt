@@ -87,7 +87,7 @@ xacro_add_files(
 install(TARGETS whill_modelc_publisher RUNTIME DESTINATION lib/${PROJECT_NAME})
 install(TARGETS whill_modelc_controller RUNTIME DESTINATION lib/${PROJECT_NAME})
 
-install(DIRECTORY params launch config
+install(DIRECTORY params launch
   DESTINATION share/${PROJECT_NAME}
 )
 install(DIRECTORY xacro/
