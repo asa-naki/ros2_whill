@@ -36,6 +36,10 @@ This command is only available Model CR firmware updatedd after 2019.12. If you 
 - [ros2_whill_interfaces](https://github.com/WHILL/ros2_whill_interfaces)
 
 ## Build
+please install before building
+'''sh
+sudo apt install ros-galactic-xacro
+'''
 In your shell:
 ```sh
 cd ~/<your_ros2_ws>/src
